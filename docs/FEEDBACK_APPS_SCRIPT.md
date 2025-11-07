@@ -8,6 +8,8 @@ Hướng dẫn cách tích hợp hai phương pháp nhận góp ý: Google Forms
 
 Đây là cách đơn giản nhất để nhận góp ý, không cần code hay deploy server.
 
+### A. Cấu Hình Form
+
 1. **Tạo Google Form mới**
 
    - Mở [forms.google.com](https://forms.google.com)
@@ -41,6 +43,30 @@ Hướng dẫn cách tích hợp hai phương pháp nhận góp ý: Google Forms
      ```
      VITE_FEEDBACK_ENDPOINT=https://docs.google.com/forms/d/e/YOUR-FORM-ID/formResponse
      ```
+
+### B. Cấu Hình Email Thông Báo
+
+1. **Mở Google Apps Script cho Form**
+
+   - Mở Google Form của bạn
+   - Click vào menu ba chấm (⋮)
+   - Chọn "Script editor"
+
+2. **Thêm Code Gửi Email**
+
+   - Paste code từ file `docs/EMAIL_NOTIFICATION.gs` vào editor
+   - Lưu file (Ctrl+S hoặc ⌘+S)
+
+3. **Tạo Trigger**
+   - Chạy function `createFormTrigger` một lần
+   - Hoặc tạo trigger thủ công:
+     - Click vào icon đồng hồ (Triggers) bên trái
+     - "+ Add Trigger"
+     - Choose function: `onFormSubmit`
+     - Select event type: "From form" → "On form submit"
+     - Save
+
+Sau khi cấu hình, mỗi khi có góp ý mới, email thông báo sẽ được gửi tới `tuonggh1@gmail.com` với đầy đủ thông tin góp ý.
 
 ## II. Sử Dụng Google Apps Script
 
