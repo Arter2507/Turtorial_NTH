@@ -31,7 +31,6 @@ export interface TamThanhSonChest {
   "Cơ chế": string;
 }
 
-
 export interface LocationsData {
   [locationName: string]: (ChestLocation | EncounterLocation | TamThanhSonChest)[];
 }
@@ -39,8 +38,9 @@ export interface LocationsData {
 export interface CharacterBuild {
   "Môn Phái": string;
   "Vai Trò": string;
-  // Allow for flexible, complex properties — prefer `unknown` instead of `any`
-  [key: string]: unknown;
+  // The remaining keys can be arbitrary fields describing the build. eslint may
+  // incorrectly flag nested index signatures here; allow this pattern explicitly.
+  [key: string]: string | string[] | { [key: string]: string | string[] };
 }
 
 export interface SpecialSkillItem {

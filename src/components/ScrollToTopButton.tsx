@@ -26,7 +26,7 @@ export const ScrollToTopButton: React.FC = () => {
       type="button"
       onClick={scrollToTop}
       className={`
-        fixed bottom-8 right-8 z-20
+        fixed bottom-8 left-8 z-20
         p-3 rounded-full
         bg-sky-600 hover:bg-sky-700
         dark:bg-amber-500 dark:hover:bg-amber-600
