@@ -1,15 +1,18 @@
 /** @format */
 
-import React, { useState, useMemo } from 'react';
-import { guideData } from './data';
-import type { GameGuideData } from './types';
+import { useState, useMemo } from 'react';
+import { guideData } from './types/data';
+import PWAOnlineIndicator from './components/pwa/PWAOnlineIndicator';
+import type { GameGuideData } from './types/types';
 import { useTheme } from './hooks/useTheme';
-import { Header } from './components/Header';
-import { TableOfContents } from './components/TableOfContents';
-import { Section } from './components/Section';
-import { ScrollToTopButton } from './components/ScrollToTopButton';
-import FeedbackButton from './components/FeedbackButton';
-import { ToastProvider } from './components/Toast';
+import { Header } from './components/layout/Header';
+import { TableOfContents } from './components/navigation/TableOfContents';
+import { Footer } from './components/layout/Footer';
+import { Sitemap } from './components/navigation/Sitemap';
+import { Section } from './components/layout/Section';
+import { ScrollToTopButton } from './components/ui/ScrollToTopButton';
+import FeedbackButton from './components/ui/FeedbackButton';
+import { ToastProvider } from './components/ui/Toast';
 import {
 	ClipboardListIcon,
 	BookOpenIcon,
@@ -25,7 +28,8 @@ import {
 	KeyIcon,
 	SwordIcon,
 	ScrollIcon,
-} from './components/icons';
+} from './components/common/icons';
+import React from 'react';
 
 const slugify = (text: string): string => {
 	return text
@@ -72,16 +76,20 @@ const DesktopTableOfContents: React.FC<{
 						const isMatched = matchedSectionIds.has(id);
 						return (
 							<li key={id}>
-								<a
-									href={`#${id}`}
-									className={`flex items-center gap-3 text-sm transition-colors ${
-										isMatched
-											? 'font-semibold text-sky-600 dark:text-sky-400'
-											: 'text-gray-600 dark:text-gray-400 hover:text-sky-600 dark:hover:text-sky-400'
-									}`}>
-									{React.cloneElement(icon, { className: 'h-5 w-5 shrink-0' })}
-									<span>{title}</span>
-								</a>
+								<div className='flex items-center justify-between gap-2'>
+									<a
+										href={`#${id}`}
+										className={`flex items-center gap-3 text-sm transition-colors flex-1 ${
+											isMatched
+												? 'font-semibold text-sky-600 dark:text-sky-400'
+												: 'text-gray-600 dark:text-gray-400 hover:text-sky-600 dark:hover:text-sky-400'
+										}`}>
+										{React.cloneElement(icon, {
+											className: 'h-5 w-5 shrink-0',
+										})}
+										<span>{title}</span>
+									</a>
+								</div>
 							</li>
 						);
 					})}
@@ -91,27 +99,11 @@ const DesktopTableOfContents: React.FC<{
 	);
 };
 
-const CurrentDateTime: React.FC = () => {
-	const [now, setNow] = React.useState(new Date());
-	React.useEffect(() => {
-		const t = setInterval(() => setNow(new Date()), 1000);
-		return () => clearInterval(t);
-	}, []);
-	const mm = String(now.getMonth() + 1).padStart(2, '0');
-	const dd = String(now.getDate()).padStart(2, '0');
-	const yyyy = String(now.getFullYear());
-	const hh = String(now.getHours()).padStart(2, '0');
-	const min = String(now.getMinutes()).padStart(2, '0');
-	const ss = String(now.getSeconds()).padStart(2, '0');
-	return (
-		<span className='text-sm text-gray-500 dark:text-gray-400'>{`${mm}/${dd}/${yyyy} ${hh}:${min}:${ss}`}</span>
-	);
-};
-
 const App: React.FC = () => {
 	const [theme, toggleTheme] = useTheme();
 	const [searchQuery, setSearchQuery] = useState('');
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isSitemapOpen, setIsSitemapOpen] = useState(false);
 
 	const sections = useMemo(() => {
 		return Object.keys(guideData)
@@ -175,6 +167,7 @@ const App: React.FC = () => {
 	return (
 		<ToastProvider>
 			<>
+				<PWAOnlineIndicator />
 				<Header
 					title={guideData['Tên Tài Liệu']}
 					titleIcon={<ScrollIcon />}
@@ -183,6 +176,7 @@ const App: React.FC = () => {
 					searchQuery={searchQuery}
 					setSearchQuery={setSearchQuery}
 					onToggleMenu={() => setIsMenuOpen(true)}
+					onOpenSitemap={() => setIsSitemapOpen(true)}
 				/>
 				<TableOfContents
 					sections={sections}
@@ -222,11 +216,20 @@ const App: React.FC = () => {
 						/>
 					</div>
 				</main>
-				<footer className='text-center py-8 mt-12 border-t border-gray-200 dark:border-slate-800'>
-					<p className='text-sm text-gray-500 dark:text-gray-400'>
-						Tạo bởi AI cho cộng đồng Nghịch Thủy Hàn. <CurrentDateTime />
-					</p>
-				</footer>
+				<Footer />
+				{isSitemapOpen && (
+					<div className='fixed inset-0 z-50 flex items-center justify-center bg-black/40'>
+						<div className='bg-white dark:bg-slate-900 rounded-lg shadow-lg max-w-lg md:max-w-4xl w-full relative p-6 max-h-[90vh] overflow-y-auto'>
+							<button
+								className='absolute top-2 right-2 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-800'
+								onClick={() => setIsSitemapOpen(false)}
+								aria-label='Đóng sitemap'>
+								<span className='text-xl'>×</span>
+							</button>
+							<Sitemap />
+						</div>
+					</div>
+				)}
 				<ScrollToTopButton />
 				<FeedbackButton />
 			</>

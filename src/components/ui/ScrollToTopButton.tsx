@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState, useEffect } from 'react';
-import { ArrowUpIcon } from './icons';
+import { ArrowUpIcon } from '../common/icons';
 
 export const ScrollToTopButton: React.FC = () => {
 	const [isVisible, setIsVisible] = useState(false);

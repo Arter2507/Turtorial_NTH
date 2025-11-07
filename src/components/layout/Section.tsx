@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useMemo, useState } from 'react';
-import { useToast } from '../lib/toast';
+import { useToast } from '../../lib/toast';
 import type {
 	ExecutiveSummaryItem,
 	ResourceItem,
@@ -15,7 +15,7 @@ import type {
 	EconomyData,
 	SectJoinGuide,
 	DivineWeaponGuide,
-} from '../types';
+} from '../../types/types';
 import {
 	ClockIcon,
 	ChevronRightIcon,
@@ -45,7 +45,10 @@ import {
 	ShieldCheckIcon,
 	ClipboardIcon,
 	CheckIcon,
-} from './icons';
+	SwordIcon,
+	CollectionIcon,
+	HammerIcon,
+} from '../common/icons';
 
 const slugify = (text: string): string => {
 	return text
@@ -473,7 +476,6 @@ const CharacterBuildsTabs: React.FC<{
 	builds: CharacterBuild[];
 	query: string;
 }> = ({ builds, query }) => {
-	const [selectedFilter, setSelectedFilter] = useState<string>('');
 	const iconMap: Record<string, React.FC<{ className?: string }>> = {
 		'Tố Vấn (Healer/Hỗ Trợ)': LeafIcon,
 		'Cửu Linh (DPS Tầm Xa)': GhostIcon,
@@ -482,14 +484,6 @@ const CharacterBuildsTabs: React.FC<{
 		'Thần Tương (DPS Tầm Xa)': MusicIcon,
 		'Thiết Y (Tanker/DPS)': FistIcon,
 	};
-
-	const filterOptions = [
-		'',
-		...new Set(builds.map((build) => build['Môn Phái'])),
-	];
-	const filteredBuilds = selectedFilter
-		? builds.filter((build) => build['Môn Phái'] === selectedFilter)
-		: builds;
 
 	const handleSectLink = (monPhai: string) => {
 		const sectElement = document.getElementById(
@@ -502,25 +496,8 @@ const CharacterBuildsTabs: React.FC<{
 
 	return (
 		<div className='space-y-6'>
-			<div className='flex justify-end'>
-				<select
-					aria-label='Lọc Môn phái'
-					value={selectedFilter}
-					onChange={(e) => setSelectedFilter(e.target.value)}
-					className='block w-64 rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm focus:border-sky-500 focus:ring-sky-500'>
-					<option value=''>Tất cả Môn phái</option>
-					{filterOptions.filter(Boolean).map((option) => (
-						<option
-							key={option}
-							value={option}>
-							{option}
-						</option>
-					))}
-				</select>
-			</div>
-
 			<TabbedInterface
-				items={filteredBuilds}
+				items={builds}
 				getLabel={(item) => item['Môn Phái']}
 				getIcon={(item) => {
 					const Icon = iconMap[item['Môn Phái']] || ShieldCheckIcon;
@@ -540,9 +517,6 @@ const CharacterBuildsTabs: React.FC<{
 									/>
 								</button>
 							</h4>
-							<span className='text-sm text-gray-500 dark:text-gray-400'>
-								Click tên môn phái để xem hướng dẫn gia nhập
-							</span>
 						</div>
 						<div className='space-y-2 text-sm divide-y divide-slate-200 dark:divide-slate-700'>
 							{Object.entries(item)
@@ -561,6 +535,90 @@ const CharacterBuildsTabs: React.FC<{
 				query={query}
 			/>
 		</div>
+	);
+};
+
+const SpecialSkillsTabs: React.FC<{
+	skills: SpecialSkillData;
+	query: string;
+}> = ({ skills, query }) => {
+	const iconMap: Record<string, React.FC<{ className?: string }>> = {
+		'Đặc Kỹ Vũ Khí (Rèn)': SwordIcon,
+		'Đặc Kỹ Áo': ShieldCheckIcon,
+		'Trang Bị Khuyên Dùng': CollectionIcon,
+		'Khảm Ngọc': GemIcon,
+	};
+
+	const skillEntries = Object.entries(skills);
+
+	return (
+		<TabbedInterface
+			items={skillEntries}
+			getLabel={([key]) => key}
+			getIcon={([key]) => {
+				const Icon = iconMap[key] || HammerIcon;
+				return <Icon className='h-5 w-5 shrink-0' />;
+			}}
+			renderContent={([key, value]) => (
+				<div className='bg-white/50 dark:bg-slate-800/50 p-6 rounded-lg shadow-md border border-gray-200 dark:border-slate-700'>
+					<h4 className='font-bold text-lg text-sky-600 dark:text-sky-400 mb-3'>
+						<HighlightMatches
+							text={key}
+							query={query}
+						/>
+					</h4>
+					{Array.isArray(value) ? (
+						<ul className='space-y-4'>
+							{value.map((item, index) =>
+								typeof item === 'string' ? (
+									<li
+										key={index}
+										className='list-disc list-inside'>
+										<HighlightMatches
+											text={item}
+											query={query}
+										/>
+									</li>
+								) : (
+									<li key={item.Tên}>
+										<strong className='block text-gray-800 dark:text-gray-200'>
+											<HighlightMatches
+												text={item.Tên}
+												query={query}
+											/>
+										</strong>
+										<div className='pl-4 mt-1 text-gray-700 dark:text-gray-300'>
+											<HighlightMatches
+												text={item['Hiệu Quả']}
+												query={query}
+											/>
+											{item.Nguồn && (
+												<span className='block text-xs italic text-gray-500 dark:text-gray-400 mt-1'>
+													(Nguồn:{' '}
+													<HighlightMatches
+														text={item.Nguồn}
+														query={query}
+													/>
+													)
+												</span>
+											)}
+										</div>
+									</li>
+								)
+							)}
+						</ul>
+					) : (
+						<p className='text-gray-700 dark:text-gray-300'>
+							<HighlightMatches
+								text={String(value)}
+								query={query}
+							/>
+						</p>
+					)}
+				</div>
+			)}
+			query={query}
+		/>
 	);
 };
 
@@ -598,7 +656,8 @@ const ContentRenderer: React.FC<{
 		if (
 			isCharacterBuilds(content) ||
 			isResource(content) ||
-			isLocationData(content)
+			isLocationData(content) ||
+			isSpecialSkills(content)
 		) {
 			return []; // No sub-TOC for tabbed views
 		}
@@ -675,69 +734,10 @@ const ContentRenderer: React.FC<{
 		// Special Skills
 		if (isSpecialSkills(content)) {
 			return (
-				<div className='bg-white/50 dark:bg-slate-800/50 p-6 rounded-lg shadow-md border border-gray-200 dark:border-slate-700 space-y-6'>
-					{Object.entries(content as SpecialSkillData).map(([key, value]) => (
-						<div
-							key={key}
-							id={slugify(`${parentId}-${key}`)}
-							className='scroll-mt-20'>
-							<h4 className='font-semibold text-md text-sky-600 dark:text-sky-400 mb-2 pb-1 border-b border-gray-300 dark:border-slate-600'>
-								<HighlightMatches
-									text={key}
-									query={query}
-								/>
-							</h4>
-							{Array.isArray(value) ? (
-								<ul className='space-y-4'>
-									{value.map((item, index) =>
-										typeof item === 'string' ? (
-											<li
-												key={index}
-												className='list-disc list-inside'>
-												<HighlightMatches
-													text={item}
-													query={query}
-												/>
-											</li>
-										) : (
-											<li key={item.Tên}>
-												<strong className='block text-gray-800 dark:text-gray-200'>
-													<HighlightMatches
-														text={item.Tên}
-														query={query}
-													/>
-												</strong>
-												<div className='pl-4 mt-1 text-gray-700 dark:text-gray-300'>
-													<HighlightMatches
-														text={item['Hiệu Quả']}
-														query={query}
-													/>
-													{item.Nguồn && (
-														<span className='block text-xs italic text-gray-500 dark:text-gray-400 mt-1'>
-															(Nguồn:{' '}
-															<HighlightMatches
-																text={item.Nguồn}
-																query={query}
-															/>
-															)
-														</span>
-													)}
-												</div>
-											</li>
-										)
-									)}
-								</ul>
-							) : (
-								<p className='text-gray-700 dark:text-gray-300'>
-									<HighlightMatches
-										text={String(value)}
-										query={query}
-									/>
-								</p>
-							)}
-						</div>
-					))}
-				</div>
+				<SpecialSkillsTabs
+					skills={content}
+					query={query}
+				/>
 			);
 		}
 

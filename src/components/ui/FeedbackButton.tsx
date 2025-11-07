@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useRef, useState } from 'react';
-import { useToast } from '../lib/toast';
+import { useToast } from '../../lib/toast';
 
 // Endpoint for the Apps Script Web App. Prefer setting VITE_FEEDBACK_ENDPOINT in .env for Vite.
 // Fallback: edit this file and set the URL string below if you prefer.

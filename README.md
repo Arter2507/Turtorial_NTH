@@ -12,6 +12,10 @@ Tài liệu hướng dẫn toàn diện cho người mới bắt đầu chơi ga
 - 📋 Copy tọa độ dễ dàng với thông báo thành công
 - 💬 Hệ thống góp ý với tích hợp Google Forms/Sheets
 - 📱 Giao diện responsive, tối ưu cho mobile
+- 🔄 Hỗ trợ PWA (Progressive Web App)
+  - ⚡ Hoạt động offline
+  - 📥 Có thể cài đặt như ứng dụng native
+  - 🔄 Tự động đồng bộ dữ liệu khi có mạng
 
 ## Cài Đặt & Chạy Locally
 
@@ -75,3 +79,16 @@ Mọi đóng góp đều được hoan nghênh! Vui lòng:
 ## License
 
 [MIT License](LICENSE)
+
+## Sitemap
+
+This project includes an HTML Sitemap (top-down tree view) accessible from the header sitemap button. From the sitemap modal you can:
+
+- View a top-down tree of document sections and jump to any section.
+
+How to use:
+
+1. Run the app (`npm install` then `npm run dev`).
+2. Click the sitemap button in the header to open the sitemap modal.
+
+If you add or remove sections in the content source (`src/data.ts`), the sitemap will automatically update.
