@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # Bí Kíp Nhập Môn Nghịch Thủy Hàn
 
 Tài liệu hướng dẫn toàn diện cho người mới bắt đầu chơi game Nghịch Thủy Hàn. Được xây dựng với React, TypeScript, và Tailwind CSS.
@@ -38,6 +40,7 @@ Sau khi chạy, mở [http://localhost:3000](http://localhost:3000) để xem t�
 Hệ thống góp ý hỗ trợ hai cách tích hợp:
 
 1. **Google Forms (Khuyến nghị)**
+
    - Tạo Google Form với các trường: Email (entry.207403457), Tiêu đề (entry.2134557201), Nội dung (entry.416051144)
    - Lấy URL formResponse (không phải URL viewform)
    - Cấu hình trong .env: `VITE_FEEDBACK_ENDPOINT=<form-response-url>`

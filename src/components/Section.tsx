@@ -43,8 +43,8 @@ import {
 	// FIX: Import missing icons.
 	MapPinIcon,
 	ShieldCheckIcon,
-  ClipboardIcon,
-  CheckIcon,
+	ClipboardIcon,
+	CheckIcon,
 } from './icons';
 
 const slugify = (text: string): string => {
@@ -261,7 +261,7 @@ const TabbedInterface = <T extends object>({
 	renderContent: (item: T) => React.ReactNode;
 	query: string;
 }) => {
-  const [activeTab, setActiveTab] = useState(0);
+	const [activeTab, setActiveTab] = useState(0);
 	const activeItem = items[activeTab];
 	if (!activeItem) return null;
 
@@ -375,7 +375,11 @@ const LocationTabs: React.FC<{ locations: LocationsData; query: string }> = ({
 			setTimeout(() => setCopiedCoords(null), 2000);
 		} catch (err) {
 			console.error('Failed to copy text: ', err);
-			try { showToast('Không thể sao chép tọa độ', 'error'); } catch (e) { console.warn(e); }
+			try {
+				showToast('Không thể sao chép tọa độ', 'error');
+			} catch (e) {
+				console.warn(e);
+			}
 		}
 	};
 
@@ -437,13 +441,12 @@ const LocationTabs: React.FC<{ locations: LocationsData; query: string }> = ({
 									</div>
 									<button
 										onClick={() => copyToClipboard(item['Tọa độ'])}
-										className="p-1.5 rounded-md text-gray-500 hover:text-sky-600 hover:bg-sky-100 dark:hover:bg-sky-900/30 dark:hover:text-sky-400 transition-colors"
-										title="Copy coordinates"
-									>
+										className='p-1.5 rounded-md text-gray-500 hover:text-sky-600 hover:bg-sky-100 dark:hover:bg-sky-900/30 dark:hover:text-sky-400 transition-colors'
+										title='Copy coordinates'>
 										{copiedCoords === item['Tọa độ'] ? (
-											<CheckIcon className="h-4 w-4" />
+											<CheckIcon className='h-4 w-4' />
 										) : (
-											<ClipboardIcon className="h-4 w-4" />
+											<ClipboardIcon className='h-4 w-4' />
 										)}
 									</button>
 								</div>
@@ -480,30 +483,38 @@ const CharacterBuildsTabs: React.FC<{
 		'Thiết Y (Tanker/DPS)': FistIcon,
 	};
 
-	const filterOptions = ['', ...new Set(builds.map(build => build['Môn Phái']))];
-	const filteredBuilds = selectedFilter 
-		? builds.filter(build => build['Môn Phái'] === selectedFilter)
+	const filterOptions = [
+		'',
+		...new Set(builds.map((build) => build['Môn Phái'])),
+	];
+	const filteredBuilds = selectedFilter
+		? builds.filter((build) => build['Môn Phái'] === selectedFilter)
 		: builds;
 
 	const handleSectLink = (monPhai: string) => {
-		const sectElement = document.getElementById(slugify(`gia-nhap-mon-phai-an-ky-ngo-${monPhai}`));
+		const sectElement = document.getElementById(
+			slugify(`gia-nhap-mon-phai-an-ky-ngo-${monPhai}`)
+		);
 		if (sectElement) {
 			sectElement.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
 
 	return (
-		<div className="space-y-6">
-			<div className="flex justify-end">
+		<div className='space-y-6'>
+			<div className='flex justify-end'>
 				<select
-					aria-label="Lọc Môn phái"
+					aria-label='Lọc Môn phái'
 					value={selectedFilter}
 					onChange={(e) => setSelectedFilter(e.target.value)}
-					className="block w-64 rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm focus:border-sky-500 focus:ring-sky-500"
-				>
-					<option value="">Tất cả Môn phái</option>
+					className='block w-64 rounded-md border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm focus:border-sky-500 focus:ring-sky-500'>
+					<option value=''>Tất cả Môn phái</option>
 					{filterOptions.filter(Boolean).map((option) => (
-						<option key={option} value={option}>{option}</option>
+						<option
+							key={option}
+							value={option}>
+							{option}
+						</option>
 					))}
 				</select>
 			</div>
@@ -517,20 +528,19 @@ const CharacterBuildsTabs: React.FC<{
 				}}
 				renderContent={(item) => (
 					<div className='bg-white/50 dark:bg-slate-800/50 p-6 rounded-lg shadow-md border border-gray-200 dark:border-slate-700'>
-						<div className="flex items-center justify-between mb-3">
+						<div className='flex items-center justify-between mb-3'>
 							<h4 className='font-bold text-lg text-sky-600 dark:text-sky-400'>
 								<button
 									onClick={() => handleSectLink(item['Môn Phái'])}
 									aria-label={`Xem hướng dẫn ${item['Môn Phái']}`}
-									className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 rounded"
-								>
+									className='hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 rounded'>
 									<HighlightMatches
 										text={item['Môn Phái']}
 										query={query}
 									/>
 								</button>
 							</h4>
-							<span className="text-sm text-gray-500 dark:text-gray-400">
+							<span className='text-sm text-gray-500 dark:text-gray-400'>
 								Click tên môn phái để xem hướng dẫn gia nhập
 							</span>
 						</div>
@@ -737,7 +747,7 @@ const ContentRenderer: React.FC<{
 			isDivineWeaponData(content) ||
 			isEconomyData(content)
 		) {
-				const dataToRender = content;
+			const dataToRender = content;
 			if (isEconomyData(content)) {
 				return (
 					<div className='bg-white/50 dark:bg-slate-800/50 p-6 rounded-lg shadow-md border border-gray-200 dark:border-slate-700 space-y-4'>

@@ -103,7 +103,9 @@ const CurrentDateTime: React.FC = () => {
 	const hh = String(now.getHours()).padStart(2, '0');
 	const min = String(now.getMinutes()).padStart(2, '0');
 	const ss = String(now.getSeconds()).padStart(2, '0');
-	return <span className='text-sm text-gray-500 dark:text-gray-400'>{`${mm}/${dd}/${yyyy} ${hh}:${min}:${ss}`}</span>;
+	return (
+		<span className='text-sm text-gray-500 dark:text-gray-400'>{`${mm}/${dd}/${yyyy} ${hh}:${min}:${ss}`}</span>
+	);
 };
 
 const App: React.FC = () => {
@@ -137,21 +139,23 @@ const App: React.FC = () => {
 
 			// Check if section title matches
 			if (key.toLowerCase().includes(lowercasedQuery)) {
-				newFilteredData[key as keyof GameGuideData] = value as unknown as GameGuideData[keyof GameGuideData];
+				newFilteredData[key as keyof GameGuideData] =
+					value as unknown as GameGuideData[keyof GameGuideData];
 				continue;
 			}
 
 			// Check if section content matches
 			if (typeof value === 'object' && value !== null) {
 				const stringifiedValue = JSON.stringify(value).toLowerCase();
-					if (stringifiedValue.includes(lowercasedQuery)) {
+				if (stringifiedValue.includes(lowercasedQuery)) {
 					// If content matches, include the *entire* original section value.
 					// Highlighting within the Section component will show the user where the matches are.
-					newFilteredData[key as keyof GameGuideData] = value as unknown as GameGuideData[keyof GameGuideData];
+					newFilteredData[key as keyof GameGuideData] =
+						value as unknown as GameGuideData[keyof GameGuideData];
 				}
 			}
 		}
-	return newFilteredData as unknown as GameGuideData;
+		return newFilteredData as unknown as GameGuideData;
 	}, [searchQuery]);
 
 	const matchedSectionIds = useMemo(() => {
