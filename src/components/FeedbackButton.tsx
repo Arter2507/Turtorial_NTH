@@ -57,7 +57,9 @@ export const FeedbackButton: React.FC = () => {
         const params = new URLSearchParams();
         // Map user's inputs to the provided entry IDs
         // entry IDs: email -> entry.207403457, title -> entry.2134557201, content -> entry.416051144
-        params.append('entry.207403457', email.trim());
+        // Use default email 'anonymous@nghichthuyhan.com' if no email provided
+        const userEmail = email.trim() || 'anonymous@nghichthuyhan.com';
+        params.append('entry.207403457', userEmail);
         params.append('entry.2134557201', title.trim());
         params.append('entry.416051144', content);
         // optionally include timestamp field if form has one (not required)
