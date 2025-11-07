@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 // Text-to-speech controls
 
 import { XIcon } from '../common/icons';
