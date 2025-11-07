@@ -44,9 +44,10 @@ Hệ thống góp ý hỗ trợ hai cách tích hợp:
    - Tạo Google Form với các trường: Email (entry.207403457), Tiêu đề (entry.2134557201), Nội dung (entry.416051144)
    - Lấy URL formResponse (không phải URL viewform)
    - Cấu hình trong .env: `VITE_FEEDBACK_ENDPOINT=<form-response-url>`
+   - Hỗ trợ thông báo email cho góp ý mới
 
 2. **Google Apps Script**
-   - Xem hướng dẫn chi tiết trong [docs/FEEDBACK_APPS_SCRIPT.md](docs/FEEDBACK_APPS_SCRIPT.md)
+   - Xem hướng dẫn chi tiết về cấu hình Form và thông báo email trong [docs/FEEDBACK_APPS_SCRIPT.md](docs/FEEDBACK_APPS_SCRIPT.md)
 
 ## Phát Triển
 
