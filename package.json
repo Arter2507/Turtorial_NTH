@@ -1,10 +1,13 @@
 {
 	"name": "bi-kip-nhap-mon-nghich-thuy-han",
+	"homepage": "https://arter2507.github.io/Turtorial_NTH/",
 	"private": true,
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
+		"predeply": "npm run build",
+		"deploy": "gh-pages -d dist",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
@@ -26,6 +29,7 @@
 		"eslint": "^8.53.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.4",
+		"gh-pages": "^6.3.0",
 		"postcss": "^8.4.31",
 		"tailwindcss": "^3.3.5",
 		"terser": "^5.44.1",

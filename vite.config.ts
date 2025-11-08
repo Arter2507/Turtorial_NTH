@@ -56,6 +56,7 @@ export default defineConfig(({ mode }) => {
 				manifest: manifestForPlugin,
 			}),
 		],
+		base: '/Turtorial_NTH',
 		server: {
 			port: 3000,
 			host: '0.0.0.0',
