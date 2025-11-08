@@ -205,6 +205,80 @@ export const guideData: GameGuideData = {
 				'Yêu cầu': 'Thắp hương trước ban thờ [11]',
 			},
 		],
+		'Từ Châu (Kỳ Ngộ Cùng Sơn Hải)': [
+			{
+				'Tọa độ': '435, 975 và 1232, 1069',
+				'Vị trí': 'Manh Mối 1 (Thỏi Vàng)',
+				'Yêu cầu':
+					"Nhặt 1 Thỏi Vàng trên nóc nhà tại (435, 975). Sau đó, đến gặp Ông Chủ Thái tại (1232, 1069) và chọn đối thoại: 'Vừa hay tôi có 1 thỏi vàng' để giao nộp và nhận manh mối.",
+			},
+			{
+				'Tọa độ': '434, 994',
+				'Vị trí': 'Manh Mối 2 (Kỳ Ngộ Dập Lửa Trạm Dịch)',
+				'Yêu cầu':
+					"Đến tọa độ (434, 994) để kích hoạt Kỳ Ngộ 'Dập lửa trạm dịch'. Hoàn thành kỳ ngộ này để nhận manh mối.",
+			},
+			{
+				'Tọa độ': '430, 1015',
+				'Vị trí': 'Manh Mối 3',
+				'Yêu cầu':
+					'Tìm và mở rương (Rương kho báu) tại tọa độ (430, 1015) để nhận manh mối.',
+			},
+			{
+				'Tọa độ': '612, 718',
+				'Vị trí': 'Manh Mối 4',
+				'Yêu cầu':
+					'Tìm và mở rương (Rương kho báu) tại tọa độ (612, 718) để nhận manh mối.',
+			},
+			{
+				'Tọa độ': '425, 726 và 375, 727 (trong hang)',
+				'Vị trí': 'Manh Mối 5 (Hang Động Lửa Băng)',
+				'Yêu cầu':
+					"Đến tọa độ (425, 726), sử dụng Kỹ năng Giang hồ 'Băng' sau đó dùng Kỹ năng Giang hồ 'Lửa' để mở lối vào Hang động. Di chuyển đến (375, 727) bên trong hang để mở rương nhận manh mối.",
+			},
+			{
+				'Tọa độ': '471, 980 và 1384, 1078',
+				'Vị trí': 'Manh Mối 6 (Cuốn Sách)',
+				'Yêu cầu':
+					"Đến (471, 980) gặp NPC Vận chuyển A Quý, đụng va chạm hoặc đánh NPC vài lần để làm rơi 1 Cuốn sách. Sau đó đến (1384, 1078) gặp NPC La Thế Trung, chọn đối thoại 'Đưa' để giao nộp cuốn sách, nhận manh mối.",
+			},
+			{
+				'Tọa độ': '1282, 1354',
+				'Vị trí': 'Manh Mối 7',
+				'Yêu cầu':
+					"Đến tọa độ (1282, 1354), sử dụng Kỹ năng Giang hồ 'Đào' (Dig) để nhận manh mối.",
+			},
+			{
+				'Tọa độ': '448, 990; 1160, 1076 và 431, 739',
+				'Vị trí': 'Manh Mối 8 (Nhiệm vụ Đệ tử)',
+				'Yêu cầu':
+					"1. Đến (448, 990), dùng Kỹ năng Giang hồ đập vỡ toàn bộ bàn ghế để kích hoạt cốt truyện. Chọn đối thoại 'Chưa nghe qua' và 'Thu nhận làm đệ tử'. 2. Đến (1160, 1076) tìm Thạch Phi Minh đối thoại để nhận 1 Cục đá. 3. Đến (431, 739), mở Túi (Bag) -> Nhiệm vụ (Quest) và chọn 'Sử dụng' Cục đá để nhận manh mối.",
+			},
+			{
+				'Tọa độ': '602, 763',
+				'Vị trí': 'Manh Mối 9',
+				'Yêu cầu':
+					'Đến tọa độ (602, 763), sử dụng Kỹ năng Giang hồ để đập vỡ chum (vại/bình gốm) để nhận manh mối.',
+			},
+			{
+				'Tọa độ': '1325, 929',
+				'Vị trí': 'Manh Mối 10',
+				'Yêu cầu':
+					'Tìm và mở rương lớn tại tọa độ (1325, 929) để nhận manh mối.',
+			},
+			{
+				'Tọa độ': '1043, 785',
+				'Vị trí': 'Manh Mối 11',
+				'Yêu cầu':
+					"Đến tọa độ (1043, 785), thực hiện hành động 'Cầu phúc' (Pray/Blessing) tại Tượng Khổng Tử để nhận manh mối.",
+			},
+			{
+				'Tọa độ': '837, 1125',
+				'Vị trí': 'Manh Mối 12',
+				'Yêu cầu':
+					"Đến tọa độ (837, 1125), sử dụng Kỹ năng Giang hồ 'Thủy' (Nước) đập vào giếng để nhận manh mối.",
+			},
+		],
 		'Nhạn Môn Quan (88 Rương)': [
 			{
 				'Tọa độ': '639, 485',

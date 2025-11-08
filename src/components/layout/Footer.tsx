@@ -26,7 +26,9 @@ export const Footer: React.FC = () => {
 	return (
 		<footer className='w-full py-4 px-6 flex items-center justify-between text-sm bg-gray-100 dark:bg-slate-900 border-t dark:border-slate-800 mt-8'>
 			<div className='text-gray-700 dark:text-gray-300'>
-				© {new Date().getFullYear()} Turtorial NTH
+				© {new Date().getFullYear()} <strong>Created by AI.</strong> All rights
+				reserved. Exclusively for use and sharing within the Justice Online
+				(Nghịch Thủy Hàn) Community
 			</div>
 			<div className='text-gray-500 dark:text-gray-400'>{time}</div>
 		</footer>
