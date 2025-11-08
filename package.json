@@ -7,7 +7,7 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"build:gh": "VITE_BASE_URL=/Turtorial_NTH/ npm run build",
-		"predeploy": "npm run build:gh && npx copyfiles vercel.json dist/",
+		"predeploy": "npm run build:gh",
 		"deploy": "gh-pages -d dist",
 		"preview": "vite preview"
 	},
