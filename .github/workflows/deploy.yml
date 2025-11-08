@@ -1,11 +1,14 @@
+# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages & Vercel
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  # === BUILD CHO GITHUB PAGES ===
+  deploy-gh-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,8 +21,8 @@ jobs:
 
       - run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Build for GitHub Pages
+        run: npm run build:gh  # Dùng VITE_BASE_URL=/Turtorial_NTH/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -29,11 +32,26 @@ jobs:
           publish_branch: gh-pages
           force_orphan: true
 
-      - name: Deploy to Vercel
+  # === BUILD & DEPLOY CHO VERCEL ===
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    needs: deploy-gh-pages  # Chạy sau khi GH Pages xong
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Deploy to Vercel (Production)
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./dist
-          production: true  # preview
+          production: true  # Deploy production
+          # Không cần working-directory → Vercel tự build
