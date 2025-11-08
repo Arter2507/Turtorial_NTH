@@ -1,5 +1,5 @@
 {
-	"version": 2,
+	"outputDirectory": "dist",
 	"builds": [
 		{
 			"src": "dist/**",
@@ -11,6 +11,5 @@
 			"src": "/(.*)",
 			"dest": "/dist/index.html"
 		}
-	],
-	"outputDirectory": "dist"
+	]
 }

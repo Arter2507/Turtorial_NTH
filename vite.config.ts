@@ -8,13 +8,9 @@ import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-	const env = loadEnv(mode, '.', '');
+	const env = loadEnv(mode, process.cwd(), '');
 
-	// Động base: Vercel = '/', GitHub Pages = '/Turtorial_NTH/'
-	const isVercel = process.env.VERCEL === '1';
-	const isGitHubPages = mode === 'production' && !isVercel;
-
-	const base = isVercel ? '/' : isGitHubPages ? '/Turtorial_NTH/' : '';
+	const base = env.VITE_BASE_URL || '/';
 
 	return {
 		base, // Đổi thành động
@@ -62,6 +58,7 @@ export default defineConfig(({ mode }) => {
 					'masked-icon.svg',
 				],
 				manifest: manifestForPlugin,
+				devOptions: { enabled: true },
 			}),
 		],
 		server: {

@@ -6,10 +6,10 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc && vite build",
-		"build:gh": "tsc && vite build --base=/Turtorial_NTH/",
+		"build:gh": "VITE_BASE_URL=/Turtorial_NTH/ npm run build",
 		"predeploy": "npm run build:gh && npx copyfiles vercel.json dist/",
 		"deploy": "gh-pages -d dist",
-		"preview": "vite preview --base=/Turtorial_NTH/"
+		"preview": "vite preview"
 	},
 	"dependencies": {
 		"react": "^18.2.0",
