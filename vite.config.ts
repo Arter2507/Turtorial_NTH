@@ -56,18 +56,23 @@ export default defineConfig(({ mode }) => {
 				manifest: manifestForPlugin,
 			}),
 		],
-		base: '/Turtorial_NTH',
+		base: '/Turtorial_NTH/',
 		server: {
 			port: 3000,
 			host: '0.0.0.0',
 		},
 		build: {
+			outDir: 'dist',
+			assetsDir: 'assets',
 			// Enable minification and tree shaking
 			minify: 'terser',
 			target: 'esnext',
 			// Split chunks for better caching
 			rollupOptions: {
 				output: {
+					assetFileNames: 'assets/[name].[hash][extname]',
+					chunkFileNames: 'assets/[name].[hash].js',
+					entryFileNames: 'assets/[name].[hash].js',
 					manualChunks: {
 						'react-vendor': ['react', 'react-dom'],
 					},
