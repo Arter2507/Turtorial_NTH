@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Turtorial_NTH/sw.js', { scope: '/Turtorial_NTH/' })})}
