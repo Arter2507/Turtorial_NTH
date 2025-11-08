@@ -10,11 +10,14 @@ import * as path from 'path';
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, '.', '');
 
-	// Động base: Vercel/GitHub Pages dùng '/', local dùng ''
-	const basePath = mode === 'production' ? '/' : '/Turtorial_NTH/';
+	// Động base: Vercel = '/', GitHub Pages = '/Turtorial_NTH/'
+	const isVercel = process.env.VERCEL === '1';
+	const isGitHubPages = mode === 'production' && !isVercel;
+
+	const base = isVercel ? '/' : isGitHubPages ? '/Turtorial_NTH/' : '';
 
 	return {
-		base: basePath, // Đổi thành động
+		base, // Đổi thành động
 		plugins: [
 			react(),
 			VitePWA({

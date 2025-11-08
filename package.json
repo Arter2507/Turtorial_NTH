@@ -1,17 +1,15 @@
 {
 	"name": "bi-kip-nhap-mon-nghich-thuy-han",
-	"homepage": "https://arter2507.github.io/Turtorial_NTH/",
 	"private": true,
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "rimraf dist && tsc && vite build",
-		"build:vercel": "tsc && vite build --base=/",
-		"predeploy": "npm run build && npx copyfiles vercel.json dist/",
-		"deploy": "gh-pages -d dist ",
-		"preview": "vite preview --base=/Turtorial_NTH/",
-		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+		"build": "tsc && vite build",
+		"build:gh": "tsc && vite build --base=/Turtorial_NTH/",
+		"predeploy": "npm run build:gh && npx copyfiles vercel.json dist/",
+		"deploy": "gh-pages -d dist",
+		"preview": "vite preview --base=/Turtorial_NTH/"
 	},
 	"dependencies": {
 		"react": "^18.2.0",
