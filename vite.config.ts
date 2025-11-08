@@ -9,7 +9,12 @@ import * as path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, '.', '');
+
+	// Động base: Vercel/GitHub Pages dùng '/', local dùng ''
+	const basePath = mode === 'production' ? '/' : '/Turtorial_NTH/';
+
 	return {
+		base: basePath, // Đổi thành động
 		plugins: [
 			react(),
 			VitePWA({
@@ -56,7 +61,6 @@ export default defineConfig(({ mode }) => {
 				manifest: manifestForPlugin,
 			}),
 		],
-		base: '/Turtorial_NTH/',
 		server: {
 			port: 3000,
 			host: '0.0.0.0',
