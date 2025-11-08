@@ -47,6 +47,11 @@ jobs:
 
       - run: npm ci
 
+      - name: Clear Vercel Cache
+        run: |
+              curl -X POST "https://api.vercel.com/v1/projects/${{ secrets.VERCEL_PROJECT_ID }}/clear-cache" \
+              -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}"
+
       - name: Deploy to Vercel (Production)
         uses: amondnet/vercel-action@v25
         with:
